@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyOwnStore.Libraries.Lang;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace MyOwnStore.Models
         /* PK */
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Você precisa preencher este campo para continuar!")]
+        [Required(ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E003")]
+        [EmailAddress(ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E004")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
     }
 }

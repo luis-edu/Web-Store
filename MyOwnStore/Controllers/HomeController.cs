@@ -19,11 +19,13 @@ namespace MyOwnStore.Controllers
         private IClientRepository _cRepo;
         private INewsletterRepository _nRepo;
         private LoginClient _lClient;
-        public HomeController(IClientRepository cRepo, INewsletterRepository nRepo, LoginClient lClient)
+        private MailSender _mSender;
+        public HomeController(IClientRepository cRepo, INewsletterRepository nRepo, LoginClient lClient, MailSender mSender)
         {
             _cRepo = cRepo;
             _nRepo = nRepo;
             _lClient = lClient;
+            _mSender = mSender;
         }
         public IActionResult Index()
         {
@@ -38,7 +40,7 @@ namespace MyOwnStore.Controllers
                 
                 TempData["NEWS_E"] = "E";
 
-                MailSender.SendMessage(newsletter);
+                _mSender.SendNewsletter(newsletter);
 
                 return (RedirectToAction(nameof(Index)));
             }

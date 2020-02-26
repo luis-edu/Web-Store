@@ -12,7 +12,43 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
+#nullable restore
+#line 3 "C:\Users\Eduardo\Documents\DevOps\MyOwnStore\MyOwnStore\Areas\Collaborator\Views\_ViewImports.cshtml"
+using MyOwnStore.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\Eduardo\Documents\DevOps\MyOwnStore\MyOwnStore\Areas\Collaborator\Views\_ViewImports.cshtml"
+using X.PagedList.Mvc.Core;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\Eduardo\Documents\DevOps\MyOwnStore\MyOwnStore\Areas\Collaborator\Views\_ViewImports.cshtml"
+using X.PagedList;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Users\Eduardo\Documents\DevOps\MyOwnStore\MyOwnStore\Areas\Collaborator\Views\_ViewImports.cshtml"
+using X.PagedList.Mvc.Core.Common;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "C:\Users\Eduardo\Documents\DevOps\MyOwnStore\MyOwnStore\Areas\Collaborator\Views\_ViewImports.cshtml"
+using MyOwnStore.Libraries.Const;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c23f9e42152bf7d52a8bb00971abe2a553dc3a9b", @"/Areas/Collaborator/Views/Home/RecoveryPassword.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a6c5424fa94c815134efb988ac563e53a1424a66", @"/Areas/Collaborator/Views/_ViewImports.cshtml")]
     public class Areas_Collaborator_Views_Home_RecoveryPassword : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

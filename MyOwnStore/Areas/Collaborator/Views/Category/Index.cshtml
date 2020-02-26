@@ -1,0 +1,156 @@
+﻿@model X.PagedList.IPagedList<MyOwnStore.Models.Category>
+@{
+    ViewData["Title"] = "Index";
+    var search = Context.Request.Query["search"];
+}
+@if (Model.Count > 0)
+{
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Categorias</h2>
+
+            <div class="right-wrapper pull-right">
+                <ol class="breadcrumbs">
+                    <li>
+                        <a asp-action="Panel" asp-controller="Home">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li><span>Categorias</span></li>
+                </ol>
+
+                <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        </header>
+        <!-- start: page -->
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="fa fa-caret-down"></a>
+                </div>
+
+                <h2 class="panel-title">Categorias</h2>
+            </header>
+            <div class="panel-body">
+                <a asp-action="Register" asp-controller="Category" class="mb-xs mt-xs mr-xs btn btn-default"><i class="fa fa-plus-circle"></i> Cadastrar</a>
+                <div class="row datatables-header form-group">
+                    <div class="form-group">
+                        <div class="col-md-6">  </div>
+                        <div class="col-md-6">
+                            <form method="get">
+                                <div class="input-group mb-md">
+                                    <!--
+                                        -- QueryString --
+                                        https://host/area/controller/mehotd?search={conteudo}&page=number
+                                    -->
+                                    <input type="text" name="search" id="search" value="@search" class="form-control" placeholder="Digite o nome da categoria ou deixe em branco para listar todas">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" type="submit">Buscar!</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped mb-none" id="datatable-default">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.First().Id)</th>
+                            <th>@Html.DisplayNameFor(model => model.First().Name)</th>
+                            <th class="hidden-phone">@Html.DisplayNameFor(model => model.First().ParentCategory)</th>
+                            <th class="hidden-phone" style="width:15%">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Category category in Model)
+                        {
+                            <tr>
+                                <td>@category.Id</td>
+                                <td>
+                                    @category.Name
+                                </td>
+                                <td class="center hidden-phone">@Html.DisplayFor(model => category.ParentCategory.Id) - @Html.DisplayFor(model => category.ParentCategory.Name)</td>
+                                <td class="center hidden-phone">
+                                    <div class="btn-group btn-group-justified">
+                                        <a asp-action="Update" asp-route-id="@category.Id" class="btn btn-primary" role="button">Editar</a>
+                                        <a asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger" role="button">Remover</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }),
+         new PagedListRenderOptions
+         {
+             UlElementClasses = new string[] { "pagination" }
+
+         })
+
+        </section>
+    </section>
+}
+else
+{
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Categorias</h2>
+
+            <div class="right-wrapper pull-right">
+                <ol class="breadcrumbs">
+                    <li>
+                        <a asp-action="Panel" asp-controller="Home">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Category"><span>Categorias</span></a>
+                    </li>
+                </ol>
+
+                <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        </header>
+        <!-- start: page -->
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="fa fa-caret-down"></a>
+                </div>
+
+                <h2 class="panel-title">Categorias</h2>
+            </header>
+            <div class="panel-body">
+                <a asp-action="Register" asp-controller="Category" class="mb-xs mt-xs mr-xs btn btn-default"><i class="fa fa-plus-circle"></i> Cadastrar</a>
+                <div class="row datatables-header form-group">
+                    <div class="form-group">
+                        <div class="col-md-6">  </div>
+                        <div class="col-md-6">
+                            <form method="get">
+                                <div class="input-group mb-md">
+                                    <!--
+                            -- QueryString --
+                            https://host/area/controller/mehotd?search={conteudo}&page=number
+                        -->
+                                    <input type="text" name="search" id="search" value="@search" class="form-control" placeholder="Digite o nome da categoria">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" type="submit">Buscar!</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <p>Nada foi encontrado...</p>
+            </div>
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page, search = search }),
+     new PagedListRenderOptions
+     {
+         UlElementClasses = new string[] { "pagination" }
+
+     })
+
+        </section>
+    </section>
+}

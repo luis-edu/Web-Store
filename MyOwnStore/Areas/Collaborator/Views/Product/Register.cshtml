@@ -1,0 +1,385 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Register";
+}
+@if (Model != null)
+{
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Atualizar Produto</h2>
+
+            <div class="right-wrapper pull-right">
+                <ol class="breadcrumbs">
+                    <li>
+                        <a asp-action="Panel" asp-controller="Home">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li><a asp-action="Index" asp-controller="Produtct"><span>Produtos</span></a></li>
+                    <li><span>Atualizar Produtos</span></li>
+                </ol>
+
+                <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="Update" asp-controller="Product" method="post" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="fa fa-caret-down"></a>
+                                <a href="#" class="fa fa-times"></a>
+                            </div>
+
+                            <h2 class="panel-title">Atualizar Produto</h2>
+                            <p class="panel-subtitle">
+                                Preencha as informações abaixo para realizar a atualização de um produto no sistema.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <input  class="hidden" asp-for="Id"/>
+                                    <label class="col-sm-2 control-label" asp-for="CategoryId"></label>
+                                    <div class="col-sm-10">
+                                        <select asp-items="@ViewBag.Category" asp-for="CategoryId" data-plugin-selectTwo class="form-control populate">
+                                            <option value="">Selecionar...</option>
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="CategoryId"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-sm-2 control-label" asp-for="Name"></label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="Name" class="form-control" placeholder="ex. Computador Gamer Bolinha louca 2000" data-plugin-maxlength maxlength="150" />
+                                    </div>
+                                    <span asp-validation-for="Name"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-sm-2 control-label" asp-for="Value"></label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                R
+                                                $
+                                            </span>
+                                            <input asp-for="Value" class="form-control money" />
+                                        </div>
+                                        <span asp-validation-for="Value"></span>
+                                    </div>
+
+                                    <div class="col-sm-9">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="col-sm-2 control-label" for="textareaDefault" asp-for="Description"></label>
+                                    <div class="col-sm-10">
+                                        <textarea asp-for="Description" class="form-control" rows="5" data-plugin-maxlength maxlength="1000"></textarea>
+                                    </div>
+                                    <span asp-validation-for="Description"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-sm-2 control-label" asp-for="Quantity"></label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                UN
+                                            </span>
+                                            <input asp-for="Quantity" class="form-control" data-plugin-maxlength maxlength="16" placeholder="2000" />
+                                            <span asp-validation-for="Quantity"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="separator" />
+                            <h2>Frete:</h2>
+                            <hr class="separator" />
+                            <div class="form-group col-md-3">
+                                <label class="col-sm-4 control-label" asp-for="Weight"></label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            KG
+                                        </span>
+                                        <input asp-for="Weight" class="form-control" data-plugin-maxlength maxlength="16" placeholder="233.534" />
+                                        <span asp-validation-for="Weight"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="col-sm-4 control-label" asp-for="Height"></label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            CM
+                                        </span>
+                                        <input asp-for="Height" class="form-control" data-plugin-maxlength maxlength="16" placeholder="140" />
+                                        <span asp-validation-for="Height"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="col-sm-4 control-label" asp-for="Width"></label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            CM
+                                        </span>
+                                        <input asp-for="Width" class="form-control" data-plugin-maxlength maxlength="16" placeholder="140" />
+                                        <span asp-validation-for="Width"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="col-sm-4 control-label" asp-for="Length"></label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            CM
+                                        </span>
+                                        <input asp-for="Length" class="form-control" data-plugin-maxlength maxlength="16" placeholder="140" />
+                                        <span asp-validation-for="Length"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Atualizar</button>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </section>
+
+}
+else
+{
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Cadastrar Produto</h2>
+
+            <div class="right-wrapper pull-right">
+                <ol class="breadcrumbs">
+                    <li>
+                        <a asp-action="Panel" asp-controller="Home">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li><a asp-action="Index" asp-controller="Produtct"><span>Produtos</span></a></li>
+                    <li><span>Cadastrar Produtos</span></li>
+                </ol>
+
+                <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+            </div>
+        </header>
+        @if (TempData["MSG_E"] != null)
+        {
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Ooops!</strong> Parece que algo deu errado... Que tal tentar novamente?
+            </div>
+        }
+        else if (TempData["MSG_S"] != null)
+        {
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Maravilha!</strong> As informações foram modificadas com sucesso!
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="Register" asp-controller="Product" method="post" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="fa fa-caret-down"></a>
+                                <a href="#" class="fa fa-times"></a>
+                            </div>
+
+                            <h2 class="panel-title">Cadastrar Produto</h2>
+                            <p class="panel-subtitle">
+                                Preencha as informações abaixo para realizar o cadastro de um produto no sistema.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="col-sm-2 control-label" asp-for="CategoryId"></label>
+                                    <div class="col-sm-10">
+                                        <select asp-items="@ViewBag.Category" asp-for="CategoryId" data-plugin-selectTwo class="form-control populate">
+                                            <option value="">Selecionar...</option>
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="CategoryId"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-sm-2 control-label" asp-for="Name"></label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="Name" class="form-control" placeholder="ex. Computador Gamer Bolinha louca 2000" data-plugin-maxlength maxlength="150" />
+                                    </div>
+                                    <span asp-validation-for="Name"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-sm-2 control-label" asp-for="Value"></label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                R
+                                                $
+                                            </span>
+                                            <input asp-for="Value" class="form-control money" />
+                                        </div>
+                                        <span asp-validation-for="Value"></span>
+                                    </div>
+
+                                    <div class="col-sm-9">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="col-sm-2 control-label" for="textareaDefault" asp-for="Description"></label>
+                                    <div class="col-sm-10">
+                                        <textarea asp-for="Description" class="form-control" rows="5" data-plugin-maxlength maxlength="1000"></textarea>
+                                    </div>
+                                    <span asp-validation-for="Description"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-sm-2 control-label" asp-for="Quantity"></label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                UN
+                                            </span>
+                                            <input asp-for="Quantity" class="form-control" data-plugin-maxlength maxlength="16" placeholder="2000" />
+                                            <span asp-validation-for="Quantity"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="separator" />
+                            <h2>Frete:</h2>
+                            <hr class="separator" />
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label class="col-sm-4 control-label" asp-for="Weight"></label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                KG
+                                            </span>
+                                            <input asp-for="Weight" class="form-control" data-plugin-maxlength maxlength="16" placeholder="233.534" />
+                                            <span asp-validation-for="Weight"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="col-sm-4 control-label" asp-for="Height"></label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                CM
+                                            </span>
+                                            <input asp-for="Height" class="form-control" data-plugin-maxlength maxlength="16" placeholder="140" />
+                                            <span asp-validation-for="Height"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="col-sm-4 control-label" asp-for="Width"></label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                CM
+                                            </span>
+                                            <input asp-for="Width" class="form-control" data-plugin-maxlength maxlength="16" placeholder="140" />
+                                            <span asp-validation-for="Width"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="col-sm-4 control-label" asp-for="Length"></label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                CM
+                                            </span>
+                                            <input asp-for="Length" class="form-control" data-plugin-maxlength maxlength="16" placeholder="140" />
+                                            <span asp-validation-for="Length"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-down"></a>
+                                    <a href="#" class="fa fa-times"></a>
+                                </div>
+
+                                <h2 class="panel-title">Arraste e solte as imagens</h2>
+                            </header>
+                            <div class="panel-body">
+                                <form  asp-action="RegisterImage" asp-controller="Image" class="dropzone dz-square" id="dropzone-example"></form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

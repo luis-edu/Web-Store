@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MyOwnStore.Libraries.Lang;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,26 +13,42 @@ namespace MyOwnStore.Models
         /* PK */
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="Este campo é obrigatório")]
-        [MinLength(4, ErrorMessage ="Este campo precisa ter ao menos {1} caracteres")]
+        [Required(ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E003")]
+        [MinLength(4,ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName ="MSG_E001")]
+        [MaxLength(64, ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E003")]
+        [Display(Name = "Nome")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Este campo é obrigatório")]
+        [Required(ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E003")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Aniversário")]
         public DateTime Birthday { get; set; }
 
-        [Required(ErrorMessage ="Este campo é obrigatório")]
-        [EmailAddress(ErrorMessage ="Digite um email válido!")]
+        [Required(ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E003")]
+        [EmailAddress(ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E004")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage ="Este campo é obrigatório")]
+        [Required(ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E003")]
+        [Display(Name = "CPF")]
         public string CPF { get; set; }
 
-        [Required(ErrorMessage ="Este campo é obrigatório")]
-        [MinLength(8,ErrorMessage = "Este campo deve ter no minimo {1} caracteres")]
-        [MaxLength(32, ErrorMessage ="Este campo deve ter no máximo {1} caracteres")]
+        [Required(ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E003")]
+        [MinLength(8, ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E001")]
+        [MaxLength(64, ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E003")]
+        [Display(Name = "Senha")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage ="Este campo é obrigatório")]
+        [NotMapped]
+        [Display(Name = "Confirmar Senha")]
+        [Compare("Password", ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E005")]
+        public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(lang_pt), ErrorMessageResourceName = "MSG_E003")]
+        [Display(Name = "Sexo")]
         public string Sex { get; set; }
+
+        [Display(Name ="Situação")]
+        public string Status { get; set; }
     }
 }

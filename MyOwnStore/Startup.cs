@@ -15,6 +15,10 @@ using MyOwnStore.Repositories;
 using MyOwnStore.Repositories.Contracts;
 using MyOwnStore.Libraries.Session;
 using MyOwnStore.Libraries.Login;
+using System.Net.Mail;
+using System.Net;
+using MyOwnStore.Libraries.Mail;
+using MyOwnStore.Libraries.Middleware;
 
 namespace MyOwnStore
 {
@@ -35,6 +39,9 @@ namespace MyOwnStore
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<INewsletterRepository, NewsletterRepository>();
             services.AddScoped<ICollaboratorRepository, CollaboratorRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IPicturesRepository, PicturesRepository>();
             /*
              *
              */
@@ -44,6 +51,23 @@ namespace MyOwnStore
             /*
              * Database Context  
              */
+
+            /*
+             * SMTP - Importação dos dados de conexão do servidor
+             */
+            services.AddScoped<SmtpClient>( options => {
+                SmtpClient smtp = new SmtpClient()
+                {
+                    Host = Configuration.GetValue<string>("Email:ServerSMTP"),
+                    Port = Configuration.GetValue<int>("Email:ServerPort"),
+                    UseDefaultCredentials = false,
+                    EnableSsl=true,
+                    Credentials = new NetworkCredential(Configuration.GetValue<string>("Email:EmailCredential"), Configuration.GetValue<string>("Email:PasswordCredential"))
+                };
+
+                return smtp;
+            });
+            services.AddScoped<MailSender>();
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("Local")));
 
             /*
@@ -61,6 +85,7 @@ namespace MyOwnStore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
             else
             {
@@ -68,6 +93,7 @@ namespace MyOwnStore
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseBrowserLink();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -75,6 +101,7 @@ namespace MyOwnStore
 
             app.UseCookiePolicy();//Ativa o uso de cookies
             app.UseSession();//Ativa o uso de sessoes
+            app.UseMiddleware<CustomValidateAntiForgeryToken>();
 
             app.UseAuthorization();
 

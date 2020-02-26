@@ -20,10 +20,6 @@ namespace MyOwnStore.Libraries.Filters
             {
                 context.Result = new ContentResult() { Content = "Acesso negado!"};
             }
-            else
-            {
-
-            }
         }
     }
 }

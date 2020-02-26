@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MyOwnStore.Database;
 using MyOwnStore.Models;
 using MyOwnStore.Repositories.Contracts;
@@ -6,15 +7,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace MyOwnStore.Repositories
 {
     public class ClientRepository : IClientRepository
     {
         private Context _db;
-        public ClientRepository(Context db)
+        private IConfiguration _config;
+        public ClientRepository(Context db, IConfiguration config)
         {
             _db = db;
+            _config = config;
         }
         public void Delete(int id)
         {
@@ -24,9 +28,17 @@ namespace MyOwnStore.Repositories
 
         }
 
-        public IEnumerable<Client> GetAll()
+        public IPagedList<Client> GetAll(int? page,string search)
         {
-            return _db.Client.AsNoTracking().ToList();
+            int PageNumber = page ?? 1;
+
+            var data = _db.Client.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                data = data.Where(a => a.Name.Contains(search.Trim()) || a.Email.Contains(search.Trim() ));
+            }
+            return data.ToPagedList(PageNumber, _config.GetValue<int>("PageSize"));
         }
 
         public Client GetClientById(int id)
